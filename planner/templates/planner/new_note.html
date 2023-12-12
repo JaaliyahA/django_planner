@@ -1,0 +1,29 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+
+<div class="container">
+    <h1 class="display-6">New Note</h1>
+    <hr class="mb-2">
+
+    <div class="p-2">
+        <div class="card shadow">
+            <div class="card-body">
+                <form action="{% url 'new_note' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                    <div>
+                        <input type="submit" name="cancel" value="Cancel" formnovalidate="formnovalidate">
+                        <button type="submit" name="submit" class="btn btn-primary">Mark Down Your Thoughts</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

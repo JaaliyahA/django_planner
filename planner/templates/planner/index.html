@@ -1,0 +1,20 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+<div class="d-flex justify-content-between">
+    <a class="btn" href="{% url 'calendar' %}?{{ prev_month }}">Last Month</a>
+
+    <a class="btn" href="{% url 'calendar' %}?{{ next_month }}">Next Month</a>
+</div>
+
+<div class="container">
+    <div class="card shadow bg-light">
+        <div class="card-body p-1">
+            {{calendar}}
+        </div>
+    </div>
+</div>
+
+
+<br>
+{% endblock %}

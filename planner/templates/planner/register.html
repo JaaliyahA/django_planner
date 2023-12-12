@@ -1,0 +1,55 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+
+
+
+<div class="container py-5">
+
+
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+    <div class="card p-2">
+        <h2 class="card-title display-3 text-center">Register</h2>
+        <div class="card-body">
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="username" class="form-label">Username:</label>
+                        <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="email" class="form-label">Email:</label>
+                        <input class="form-control" type="email" name="email" placeholder="Email Address">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="password" class="form-label">Password</label>
+                        <input class="form-control" type="password" name="password" placeholder="Password">
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="confirmation" class="form-label">Confirm Password</label>
+                        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <input type="submit" value="Register" class="text-center">
+            </form>
+        </div>
+    </div>
+
+
+
+    <p>
+        Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </p>
+</div>
+{% endblock %}

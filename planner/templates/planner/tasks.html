@@ -1,0 +1,25 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+
+<div class="container">
+    <h1 class="display-6">My Tasks</h1>
+    <hr class="mb-2">
+
+    <div class="p-5">
+        {% for task in tasks %}
+        <div class="card mb-3 shadow-sm" style="width:18rem;">
+            <div class="card-body">
+                <span>{{task.title}}</span>
+            </div>
+
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Personal Bujo{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'planner/styles.css' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="">
+    <div class=" mainContent">
+        <nav class="navbar sticky-top" style="background-color: #e9e2eec9;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}">Bujo</a>
+                {% if user.is_authenticated %}
+                <div class="d-flex justify-content-center align-items-center">
+                    <a class="btn" href="{% url 'calendar' %}">Calendar</a>
+                    <div class="vr"></div>
+                    <a class="btn" href="{% url 'taskList' %}">Tasks</a>
+                    <div class="vr"></div>
+                    <a class="btn" href="{% url 'noteList' %}">Notes</a>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <p class="nav-text me-3">Welcome <a class="nav-link"
+                                href="{% url 'profile' %}">{{user.username}}!</a></p>
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </div>
+
+                    {% else %}
+                    <a class="nav-link me-2" href="{% url 'login' %}">Log In</a>
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <div class="container-fluid mainContent ">
+                {% block main %}
+                {% endblock %}
+
+
+        </main>
+        <nav class="navbar sticky-bottom" style="background-color: #e9e2eec9;">
+            <div class="container-fluid">
+                <h6 class="nav-text">Copyright 2023</h6>
+
+            </div>
+    </div>
+    </nav>
+    </div>
+    </div>
+</body>
+
+</html>

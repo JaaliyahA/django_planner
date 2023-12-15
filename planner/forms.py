@@ -1,7 +1,32 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select,BooleanField ,DateInput, RadioSelect
+from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select ,DateInput, FileInput
 from .models import Task, Note, User, ToDoList
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model= User
+        fields = ("email", "avatar", "bio")
+        widgets = {
+            "email": EmailInput(attrs={
+                'class': "form-control mb-3",
+                'style': 'max-width: 500px;',
+                'placeholder': ''
+            }),
+             "bio": Textarea(attrs={
+                'class': "form-control mb-3",
+                'style': 'max-width: 500px;',
+                'placeholder': 'Bio'
+            }),
+             "avatar": FileInput(attrs={
+                'class': "form-control mb-3",
+                'style': 'max-width: 500px;',
+                
+            }),
+        }
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class TaskForm(forms.ModelForm):
     class Meta:

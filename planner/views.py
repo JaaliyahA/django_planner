@@ -4,7 +4,7 @@ import calendar
 from .utils import Calendar
 import datetime
 from django.contrib.auth.decorators import login_required
-from .forms  import TaskForm, NoteForm
+from .forms  import TaskForm, NoteForm, UserForm
 
 
 # Create your views here.
@@ -28,15 +28,16 @@ class CalendarView(ListView):
         # use today's date for the calendar
        # d = get_date(self.request.GET.get('day', None))
         d = get_date(self.request.GET.get('month', None))
-        # Instantiate our calendar class with today's year and date
+        
         cal = Calendar(d.year, d.month)
 
-        # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
         
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
+        context['prev_year'] = prev_year(d)
+        context['next_year'] = next_year(d)
         return context
     
 def prev_month(d):
@@ -51,7 +52,17 @@ def next_month(d):
         next_month = last + datetime.timedelta(days=1)
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
-    
+def prev_year(d):
+        first = d.replace(day=1)
+        prev_year = first - datetime.timedelta(days=365)
+        print(prev_year)
+        month = 'month=' + str(prev_year.year) + '-' + str(prev_year.month)
+        return month
+def next_year(d):
+        first = d.replace(day=1)
+        next_year = first + datetime.timedelta(days=365)
+        month = 'month=' + str(next_year.year) + '-' + str(next_year.month)
+        return month
 
 def get_date(req_day):
         if req_day:
@@ -64,8 +75,13 @@ MONTHS = ["January", "February", "March", "April", "May", "June", "July", "Augus
 def daily(request, year, month, day):
     date = f'{MONTHS[month-1]} {day}, {year}'
     in_progress_tasks = Task.objects.filter(is_completed = False)
-    tasks = Task.objects.filter(due_date=datetime.date(int(year), int(month), int(day)))
-    notes = Note.objects.filter(created_on=datetime.date(int(year), int(month), int(day)))
+    tasks = Task.objects.filter(due_date__day=day,
+                                due_date__month=month,
+                                due_date__year = year,)
+    print(tasks)
+    notes = Note.objects.filter(created_on__day=day, 
+                                            created_on__month = month,
+                                            created_on__year = year)
     print(notes)
     return render(request, "planner/day.html", {"date":date, "tasks": tasks, "notes": notes, "in_prog_tasks": in_progress_tasks })
 
@@ -129,7 +145,8 @@ def taskList(request):
     return render(request, "planner/tasks.html", {"tasks":taskList})
 
 def noteList(request):
-    return render(request, "planner/notes.html")
+    noteList = Note.objects.all()
+    return render(request, "planner/notes.html", {"notes":noteList})
 
 @login_required
 def profile(request):
@@ -160,7 +177,20 @@ def new_note(request):
         note.user = request.user
         note.save()
         form.save_m2m()
-        return redirect("index")
+        return redirect("calendar")
     else:
         form = NoteForm()
     return render(request, "planner/new_note.html", {"form":form})
+
+@login_required(login_url="login")
+def edit_profile(request):
+    profile = request.user
+    if request.method == "POST":
+        if "cancel" in request.POST:
+            return redirect("profile")
+        form = UserForm(request.POST, request.FILES, instance=profile)
+        form.save()
+        return redirect("profile")
+    else:
+        form = UserForm(instance=profile)
+    return render(request, "planner/edit_profile.html", {"form":form})

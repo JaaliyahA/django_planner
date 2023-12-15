@@ -5,18 +5,28 @@
 <div class="container">
     <h1 class="display-6">My Tasks</h1>
     <hr class="mb-2">
-
-    <div class="p-5">
-        {% for task in tasks %}
-        <div class="card mb-3 shadow-sm" style="width:18rem;">
-            <div class="card-body">
-                <span>{{task.title}}</span>
+    <div class="p-5 pt-0">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="list-group list-group-flush">
+                    <div class="card">
+                        <div class="card-body"> {% for task in tasks %}
+                            <div class="list-group-item">
+                                {% if task.due_date != None %}
+                                <p> <i class="bi bi-dot fs-5 p-0"></i>{{task.title}} Due: {{task.due_date}}</p>
+                                {% else %}
+                                <p> <i class="bi bi-dot fs-5 p-0"></i>{{task.title}}</p>
+                                {% endif %}
+                            </div> {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
-        </div>
-        {% endfor %}
 
+
+        </div>
     </div>
 
 </div>

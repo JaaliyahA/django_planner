@@ -1,8 +1,37 @@
 {% extends "planner/layout.html" %}
 
 {% block main %}
-<div class="container">
-    <h1>Profile</h1>
+<div class="container vh-100">
+    <h1>{{user.username}}'s Profile</h1>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="{{user.avatar.url}}" alt="" class="border rounded-circle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="lead">{{user.bio}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

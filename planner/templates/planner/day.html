@@ -3,86 +3,109 @@
 {% block main %}
 
 
-<div class="container border border-1 ">
-    <h1 class="display-4">{{date}}</h1>
+<div class="container-fluid mt-3">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+            <h1 class="display-4">{{date}}</h1>
+        </div>
+        <div class="col-auto">
+            <a class="btn" href="{% url 'new_task' %}">New Task</a>
+            <a class="btn" href="{% url 'new_note' %}">New Note</a>
+        </div>
+
+    </div>
+
     <hr class="mb-3">
-    <div class="row">
-        <h3>Today's Tasks</h3>
-        <div class="col overflow-scroll" style="max-height: 70vh;">
-            <div class="card-body text-center">
-                <h5>From your Todo List:</h5>
-            </div>
-            {% for task in in_prog_tasks %}
-            <div class="card shadow mb-3">
-                <div class="accordion accorion-flush" id="taskAccorion">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header p-2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapse{{task.id}}">
-                                {{task.title}}</button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="flush-collapse{{task.id}}"
-                            data-bs-parent="#taskAccordion">
-                            <div class="card-body border border-1 m-4 mt-0">
-                                {% if task.description %}
-                                <p>{{task.description}}</p>
-                                {% else %}
-                                <p>No description provided</p>
-                                {% endif %}
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary">Mark Complete?</button>
+    <div class="row justify-content-center vh-100">
+        <div class="col-6">
+            <h3>Today's Tasks</h3>
+            <div class="row mb-3">
+                <div class="col overflow-scroll" style="max-height: 70vh;">
+                    <div class="card-body text-center">
+                        <h5>Priorities:</h5>
+                    </div>
+                    {% for task in tasks %}
+                    <div class="card shadow-sm mb-1">
+                        <div class="accordion accorion-flush" id="taskAccorion">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header p-2">
+                                    <button class="accordion-button collapsed p-0" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse{{task.id}}">
+                                        <i class="bi bi-dot fs-2 p-0"></i>{{task.title}}</button>
+                                </h3>
+                                <div class="accordion-collapse collapse" id="collapse{{task.id}}"
+                                    data-bs-parent="#taskAccordion">
+                                    <p>Due on: {{task.due_date}}</p>
+                                    <div class="card-body border border-1 m-4 mt-0">
+                                        {% if task.description %}
+                                        <p>{{task.description}}</p>
+                                        {% else %}
+                                        <p>No description provided</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary">Mark Complete?</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
+                    {% endfor %}
                 </div>
-
-
             </div>
-            {% endfor %}
-        </div>
-        <div class="col overflow-scroll" style="max-height: 70vh;">
-            <div class="card-body text-center">
-                <h5>Due Today:</h5>
-            </div>
-            {% for task in tasks %}
-            <div class="card shadow mb-3">
-                <div class="accordion accorion-flush" id="taskAccorion">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header p-2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{task.id}}">
-                                {{task.title}}</button>
-                        </h3>
-                        <div class="accordion-collapse collapse" id="collapse{{task.id}}"
-                            data-bs-parent="#taskAccordion">
-                            <div class="card-body border border-1 m-4 mt-0">
-                                {% if task.description %}
-                                <p>{{task.description}}</p>
-                                {% else %}
-                                <p>No description provided</p>
-                                {% endif %}
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary">Mark Complete?</button>
+            <div class="row">
+
+                <div class="col overflow-scroll" style="max-height: 50vh;">
+                    <div class="card-body text-center">
+                        <h5>From your Todo List:</h5>
+                    </div>
+                    {% for task in in_prog_tasks %}
+                    <div class="card shadow-sm mb-2">
+                        <div class="accordion accorion-flush" id="taskAccorion">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header p-2">
+                                    <button class="accordion-button collapsed p-0" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapse{{task.id}}">
+                                        <i class="bi bi-dot fs-2 p-0"></i>{{task.title}}</button>
+                                </h3>
+                                <div class="accordion-collapse collapse " id="flush-collapse{{task.id}}"
+                                    data-bs-parent="#taskAccordion">
+                                    <div class="card-body border border-1 m-4 mt-0">
+                                        {% if task.description %}
+                                        <p>{{task.description}}</p>
+                                        {% else %}
+                                        <p>No description provided</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary">Mark Complete?</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
+                    {% endfor %}
                 </div>
-
-
             </div>
-            {% endfor %}
+
         </div>
-        <div class="col">
+
+
+
+        <div class="col-auto">
+            <p>Notes</p>
             {% for note in notes %}
-            {{note.title}}
-            <div class="card">
-                <div class="card-body border border-1 m-4 mt-0">
+
+            <div class="card m-4 mt-0">
+                <div class="card-body">
                     {% if note.is_important %}
-                    <h3 class="card-title p-3 fw-bold">{{note.title}}</h3>
+                    <p><i class="bi bi-exclamation-lg"></i>{{note.title}}</p>
                     {% else %}
-                    <h3 class="card-title p-3 fw-light">{{note.title}}</h3>
+                    <p> - {{note.title}}</p>
                     {% endif %}
                 </div>
             </div>

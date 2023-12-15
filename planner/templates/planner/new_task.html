@@ -11,7 +11,7 @@
             <div class="card-body">
                 <form action="{% url 'new_task' %}" method="post">
                     {% csrf_token %}
-                    {{ form.as_table }}
+                    {{ form.as_p }}
                     <div>
                         <input type="submit" name="cancel" value="Cancel" formnovalidate="formnovalidate">
                         <button type="submit" name="submit" class="btn btn-primary">Create Your New Task</button>

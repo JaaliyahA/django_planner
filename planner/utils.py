@@ -17,8 +17,12 @@ class Calendar(HTMLCalendar):
 	# formats a day as a td
 	# filter events by day
     def formatday(self, day, tasks):
-        task_per_day = Task.objects.filter(due_date__day=day)
-        notes_per_day = Note.objects.filter(created_on__day=day)
+        task_per_day = Task.objects.filter(due_date__day=day,
+                                           due_date__month=self.month,
+                                           due_date__year = self.year)
+        notes_per_day = Note.objects.filter(created_on__day=day, 
+                                            created_on__month = self.month,
+                                            created_on__year = self.year)
         
         d = ''
         for task in task_per_day:

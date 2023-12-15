@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-dm_vtq8-d_s$)v07vb0=to$=!^nd$(-0k_)e%hf!peru(m-1m)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jaaliyaha.pythonanywhere.com']
 
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)

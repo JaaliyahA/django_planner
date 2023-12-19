@@ -5,6 +5,7 @@ from .utils import Calendar
 import datetime
 from django.contrib.auth.decorators import login_required
 from .forms  import TaskForm, NoteForm, UserForm
+from django.db.models import Q
 
 
 # Create your views here.
@@ -26,7 +27,6 @@ class CalendarView(ListView):
         context = super().get_context_data(**kwargs)
 
         # use today's date for the calendar
-       # d = get_date(self.request.GET.get('day', None))
         d = get_date(self.request.GET.get('month', None))
         
         cal = Calendar(d.year, d.month)
@@ -39,6 +39,17 @@ class CalendarView(ListView):
         context['prev_year'] = prev_year(d)
         context['next_year'] = next_year(d)
         return context
+    
+class SearchResultsView(ListView):
+    model = Task
+    template_name = 'planner/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = Task.objects.filter(
+            Q(description__icontains=query) | Q(title__icontains=query)
+        )
+        return object_list
     
 def prev_month(d):
         first = d.replace(day=1)
@@ -194,3 +205,4 @@ def edit_profile(request):
     else:
         form = UserForm(instance=profile)
     return render(request, "planner/edit_profile.html", {"form":form})
+

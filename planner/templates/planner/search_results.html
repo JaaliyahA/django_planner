@@ -1,0 +1,65 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+
+<div class="container">
+
+    <h1 class="display-6">Search Results</h1>
+    <hr class="mb-2">
+    <div class="p-5 pt-0">
+        <div class="row mb-3">
+            <div class="col overflow-scroll" style="max-height: 70vh;">
+                <div class="card-body text-center">
+                    <h5>Priorities:</h5>
+                </div>
+                {% for task in object_list %}
+                <div class="card shadow-sm mb-1">
+                    <div class="accordion accorion-flush" id="taskAccorion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header p-2">
+                                <button class="accordion-button collapsed p-0" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{task.id}}">
+                                    <i class="bi bi-dot fs-2 p-0"></i>{{task.title}}</button>
+                            </h3>
+                            <div class="accordion-collapse collapse" id="collapse{{task.id}}"
+                                data-bs-parent="#taskAccordion">
+                                <p>Due on: {{task.due_date}}</p>
+                                <div class="card-body border border-1 m-4 mt-0">
+                                    {% if task.description %}
+                                    <p>{{task.description}}</p>
+                                    {% else %}
+                                    <p>No description provided</p>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary">Mark Complete?</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+        <!-- <ul>
+            {% for task in object_list %}
+            <li>
+                {{ task.title }}, {{ task.description}}
+            </li>
+            {% endfor %}
+        </ul> -->
+    </div>
+</div>
+</div>
+</div>
+
+
+
+{{tasks}}
+
+{% endblock %}

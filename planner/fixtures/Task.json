@@ -1,0 +1,145 @@
+[
+    {
+        "model": "planner.task",
+        "pk": 2,
+        "fields": {
+            "title": "Task one",
+            "description": "",
+            "created_on": "2023-12-11T08:41:19.525Z",
+            "due_date": "2023-12-12",
+            "user": 1,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 3,
+        "fields": {
+            "title": "task two",
+            "description": "",
+            "created_on": "2023-12-11T08:41:54.284Z",
+            "due_date": "2023-12-05",
+            "user": 1,
+            "is_completed": false,
+            "todolist": 4
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 4,
+        "fields": {
+            "title": "three",
+            "description": "",
+            "created_on": "2023-12-11T08:49:25.452Z",
+            "due_date": "2023-12-11",
+            "user": 1,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 5,
+        "fields": {
+            "title": "final",
+            "description": "",
+            "created_on": "2023-12-11T11:24:51.936Z",
+            "due_date": "2023-12-13",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 6,
+        "fields": {
+            "title": "some title",
+            "description": "description of some sort",
+            "created_on": "2023-12-11T13:51:46.949Z",
+            "due_date": "2023-12-12",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 4
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 7,
+        "fields": {
+            "title": "Something I need to do this day",
+            "description": "a description of this task",
+            "created_on": "2023-12-11T14:21:42.043Z",
+            "due_date": null,
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 8,
+        "fields": {
+            "title": "a new task appears",
+            "description": "nothing really to describe",
+            "created_on": "2023-12-11T18:31:08.339Z",
+            "due_date": "2023-12-17",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 9,
+        "fields": {
+            "title": "a new task appears",
+            "description": "nothing really to describe",
+            "created_on": "2023-12-11T18:34:03.037Z",
+            "due_date": "2023-12-17",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 10,
+        "fields": {
+            "title": "a new task appears",
+            "description": "nothing really to describe",
+            "created_on": "2023-12-11T18:34:26.379Z",
+            "due_date": "2023-12-17",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 11,
+        "fields": {
+            "title": "a new task appears",
+            "description": "nothing really to describe",
+            "created_on": "2023-12-11T18:34:48.529Z",
+            "due_date": "2023-12-17",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.task",
+        "pk": 12,
+        "fields": {
+            "title": "Something I need to do",
+            "description": "its p. important",
+            "created_on": "2023-12-15T18:35:29.290Z",
+            "due_date": "2023-12-24",
+            "user": 2,
+            "is_completed": false,
+            "todolist": 3
+        }
+    }
+]

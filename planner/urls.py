@@ -16,7 +16,8 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("new_task", views.create_new, name="new_task"),
     path("new_note", views.new_note, name="new_note"),
-    path("edit_profile", views.edit_profile, name="edit_profile")
+    path("edit_profile", views.edit_profile, name="edit_profile"),
+    path("search/", views.SearchResultsView.as_view(), name="search_results"),
 
 
 ]

@@ -3,21 +3,29 @@
 {% block main %}
 
 <div class="container">
-    <h1 class="display-6">My Tasks</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="display-6">My Tasks</h1>
+        <form action="{% url 'search_results' %}" method="get">
+            <input class="form-control" name="q" type="text" placeholder="Search...">
+        </form>
+    </div>
+
     <hr class="mb-2">
     <div class="p-5 pt-0">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="list-group list-group-flush">
                     <div class="card">
-                        <div class="card-body"> {% for task in tasks %}
+                        <div class="card-body">
+                            {% for task in tasks %}
                             <div class="list-group-item">
                                 {% if task.due_date != None %}
                                 <p> <i class="bi bi-dot fs-5 p-0"></i>{{task.title}} Due: {{task.due_date}}</p>
                                 {% else %}
                                 <p> <i class="bi bi-dot fs-5 p-0"></i>{{task.title}}</p>
                                 {% endif %}
-                            </div> {% endfor %}
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

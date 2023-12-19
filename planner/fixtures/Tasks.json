@@ -1,0 +1,54 @@
+[
+    {
+        "model": "planner.Task",
+        "pk": 13,
+        "fields": {
+            "title": "Complete Project Proposal",
+            "description": "Prepare and submit the project proposal document for client X",
+            "created_on": "2023-12-15",
+            "due_date": "2023-12-20",
+            "is_completed": false,
+            "user": 1,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.Task",
+        "pk": 14,
+        "fields": {
+            "title": "Review and Edit Presentation Slides",
+            "description": "Thoroughly review and edit the slides for the upcoming team meeting",
+            "created_on": "2023-12-15",
+            "due_date": "2023-12-18",
+            "is_completed": true,
+            "user": 1,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.Task",
+        "pk": 15,
+        "fields": {
+            "title": "Send Follow-up Emails",
+            "description": "Send follow-up emails to clients regarding recent discussions",
+            "created_on": "2023-12-16",
+            "due_date": "2023-12-22",
+            "is_completed": false,
+            "user": 1,
+            "todolist": 3
+        }
+    },
+    {
+        "model": "planner.Task",
+        "pk": 16,
+        "fields": {
+            "title": "Prepare for Client Meeting",
+            "description": "Gather necessary materials and information for the upcoming client meeting",
+            "created_on": "2023-12-19",
+            "due_date": "2023-12-21",
+            "is_completed": false,
+            "user": 1,
+            "todolist": 3
+        }
+    }
+]

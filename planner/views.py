@@ -6,10 +6,6 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from .forms  import TaskForm, NoteForm, UserForm
 from django.db.models import Q
-
-
-# Create your views here.
-
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -21,18 +17,20 @@ from .models import User, ToDoList, Task, Note
 
 class CalendarView(ListView):
     model = Task
-    template_name = 'planner/index.html'
+    template_name = 'planner/calendar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # use today's date for the calendar
         d = get_date(self.request.GET.get('month', None))
+        print(d)
         
         cal = Calendar(d.year, d.month)
 
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
+        context['date'] = f'{MONTHS[d.month - 1]} {d.year}'
         
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
@@ -97,7 +95,7 @@ def daily(request, year, month, day):
     return render(request, "planner/day.html", {"date":date, "tasks": tasks, "notes": notes, "in_prog_tasks": in_progress_tasks })
 
 def index(request):
-    return render(request, "planner/home.html")
+    return render(request, "planner/index.html")
 
 def login_view(request):
     if request.method == "POST":

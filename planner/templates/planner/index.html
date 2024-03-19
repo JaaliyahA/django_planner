@@ -1,37 +1,27 @@
 {% extends "planner/layout.html" %}
 
 {% block main %}
+{% load static %}
 
-
-<div class="container-fluid ">
-    <div class="row align-items-center">
-        <div class="col-1">
-            <div class="row">
-                <a class="btn" href="{% url 'calendar' %}?{{ prev_month }}">Last Month</a>
-            </div>
-            <div class="row">
-                <a class="btn" href="{% url 'calendar' %}?{{ prev_year }}">Last Year</a>
-            </div>
+<div class="" style="background-color: #25003e; margin: 0 0;">
+    <div class="row">
+        <div class="" style="height: 100px; background-color: #b274db;">
+            <a href="" class="nav-link"></a>
         </div>
-        <div class="col-10">
-            <div class="card shadow bg-light">
-                <div class="card-body p-1">
-                    {{calendar}}
-                </div>
-            </div>
+    </div>
+    <div class="row  align-items-center">
+        <div class=" col-6">
+            <img src="{% static 'planner/woman-book.jpg' %}" alt="" class="img-fluid border">
         </div>
-        <div class="col-1">
-            <div class="row">
-                <a class="btn" href="{% url 'calendar' %}?{{ next_month }}">Next Month</a>
-            </div>
-            <div class="row">
-                <a class="btn" href="{% url 'calendar' %}?{{ next_year }}">Next Year</a>
-            </div>
+        <div class="col-6">
+            <h1 class="display-1 text-center text-white">Plan Your Success, One Day at a Time!</h1>
         </div>
+    </div>
+    <div class="row">
+        <div class="" style="height: 100px; background-color: #b274db;"></div>
     </div>
 
 </div>
 
 
-<br>
 {% endblock %}

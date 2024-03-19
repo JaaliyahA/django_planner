@@ -1,50 +1,54 @@
-.calendar {
-    width: 98%;
-    margin: auto;
-    font-size: 13px;
-}
+ :root {
+     --app-height: 100vh
+ }
 
-.calendar tr,
-.calendar td {
-    border: 0.5px solid rgba(0, 0, 0, 0.753);
-}
+ /* .calendar {
 
-.calendar th {
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-}
+     margin: auto;
+     font-size: 13px;
+ }
 
-.calendar td {
-    width: 200px;
-    height: 130px;
-    max-height: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 10px 0px 0px 5px;
-}
+ .calendar tr,
+ .calendar td {
+     border: 0.5px solid rgba(0, 0, 0, 0.753);
+ }
 
-.month {
-    font-size: 25px;
-}
+ .calendar th {
 
-.date {
-    font-size: 16px;
-}
+     text-align: center;
+     font-size: 18px;
+ } */
 
-.mainContent {
-    height: calc(100vh-85px);
-    background-color: #fffafa;
-}
+ .calendar td {
+     /* max-width: 200px;
+     height: 130px;
+     max-height: 100px; */
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     /* padding: 10px 0px 0px 5px; */
+ }
+
+ .month {
+     font-size: 25px;
+ }
+
+ .date {
+     font-size: 16px;
+ }
+
+ .mainContent {
+     height: calc(100vh - 85px);
+     background-color: #662020;
+ }
 
 
-.sidebar {
-    width: 280px;
-    height: 100vh;
-    background-color: #002642;
-    -moz-box-shadow: 3px 0 5px 0 #5555556b;
-    -webkit-box-shadow: 3px 0 5px 0 #5555556b;
-    box-shadow: 3px 0 5px 0 #5555556b;
+ .sidebar {
+     width: 280px;
+     height: 100vh;
+     background-color: #002642;
+     -moz-box-shadow: 3px 0 5px 0 #5555556b;
+     -webkit-box-shadow: 3px 0 5px 0 #5555556b;
+     box-shadow: 3px 0 5px 0 #5555556b;
 
-}
+ }

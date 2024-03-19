@@ -18,50 +18,58 @@
 </head>
 
 <body class="">
-    <div class=" mainContent">
+    <div class="vh-100">
         <nav class="navbar sticky-top" style="background-color: #e9e2eec9;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'index' %}">Bujo</a>
                 {% if user.is_authenticated %}
-                <div class="d-flex justify-content-center align-items-center">
-                    <a class="btn" href="{% url 'calendar' %}">Calendar</a>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'calendar' %}">Calendar</a>
+                    </li>
                     <div class="vr"></div>
-                    <a class="btn" href="{% url 'taskList' %}">Tasks</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'taskList' %}">Tasks</a>
+                    </li>
                     <div class="vr"></div>
-                    <a class="btn" href="{% url 'noteList' %}">Notes</a>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex">
-                        <img src="{{user.avatar.url}}" alt="" class="border rounded-circle me-2" height="50" width="50">
-                        <p class="nav-text me-3">Welcome <a class="nav-link"
-                                href="{% url 'profile' %}">{{user.username}}!</a></p>
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'noteList' %}">Notes</a>
+                    </li>
+                </ul>
 
-                    {% else %}
+
+                <div class="d-flex">
+                    <a class="nav-brand" href="{% url 'profile' %}">
+                        <img src="{{user.avatar.url}}" alt="User Avatar"
+                            class="d-inline-block align-text-top border rounded-circle" height="30" width="30">
+                        {{user.username}}!</a>
+                    <a class="mx-3 nav-link" href="{% url 'logout' %}">Log Out</a>
+                </div>
+
+                {% else %}
+                <div class="">
                     <a class="nav-link me-2" href="{% url 'login' %}">Log In</a>
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    {% endif %}
+
                 </div>
+                {% endif %}
             </div>
         </nav>
 
         <main>
-            <div class="container-fluid mainContent ">
+            <div class="container-fluid mainContent">
                 {% block main %}
                 {% endblock %}
-
+            </div>
 
         </main>
         <nav class="navbar sticky-bottom" style="background-color: #e9e2eec9;">
             <div class="container-fluid">
                 <h6 class="nav-text">Copyright 2023</h6>
-
             </div>
+        </nav>
     </div>
-    </nav>
-    </div>
-    </div>
+
 </body>
 
 </html>

@@ -1,0 +1,35 @@
+{% extends "planner/layout.html" %}
+
+{% block main %}
+
+
+<div class="row">
+    <h1 class="text-white text-center">{{date}}</h1>
+</div>
+<div class="row align-items-center">
+    <div class="col-1">
+        <div class="row">
+            <a class="btn" href="{% url 'calendar' %}?{{ prev_month }}">Last Month</a>
+        </div>
+        <div class="row">
+            <a class="btn" href="{% url 'calendar' %}?{{ prev_year }}">Last Year</a>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="card shadow bg-light">
+            <div class="card-body p-1">
+                {{calendar}}
+            </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <div class="row">
+            <a class="btn" href="{% url 'calendar' %}?{{ next_month }}">Next Month</a>
+        </div>
+        <div class="row">
+            <a class="btn" href="{% url 'calendar' %}?{{ next_year }}">Next Year</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -3,20 +3,20 @@
 {% block main %}
 
 
-<div class="container-fluid mt-3">
-    <div class="row align-items-center justify-content-between">
-        <div class="col-auto">
-            <h1 class="display-4">{{date}}</h1>
+<div class="container-fluid mt-3 border border-2">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="display-5">{{date}}</h1>
         </div>
-        <div class="col-auto">
+        <!-- <div class="col">
             <a class="btn" href="{% url 'new_task' %}">New Task</a>
             <a class="btn" href="{% url 'new_note' %}">New Note</a>
-        </div>
+        </div> -->
 
     </div>
 
-    <hr class="mb-3">
-    <div class="row justify-content-center vh-100">
+
+    <div class="row justify-content-center">
         <div class="col-6">
             <h3>Today's Tasks</h3>
             <div class="row mb-3">
@@ -96,7 +96,7 @@
 
 
 
-        <div class="col-auto">
+        <div class="col-auto border border-1" style="max-height: 75vh;">
             <p>Notes</p>
             {% for note in notes %}
 

@@ -3,8 +3,7 @@ from calendar import HTMLCalendar
 from .models import Task, Note
 
 class Calendar(HTMLCalendar):
-    cssclass_month_head = "text-center month-head display-6"
-    # cssclasses_weekday_head = ["display-6", "display-6", "display-6","display-6","display-6","display-6","display-6",]
+    #cssclasses_weekday_head = ["mon col-1", "tue col-1", "wed col-1", "thu col-1", "fri col-1", "sat col-1", "sun col-1"]
 
     def __init__(self, year=None, month=None):
         self.year = year
@@ -35,7 +34,7 @@ class Calendar(HTMLCalendar):
                 d += f'<li class="">- {note.title} </li>'
                 
         if day != 0:
-            return f"<td><span class='date'><a class='nav-link' href='{self.generatePageUrl(day)}'> {day} </a></span><ul class=''> {d} </ul></td>"
+            return f"<td class='p-0'><span class='pt-0 mt-0'><a class='nav-link text-center' href='{self.generatePageUrl(day)}'> {day} </a></span><ul class=''> {d} </ul></td>"
         return '<td></td>'
 
 	# formats a week as a tr 
@@ -51,11 +50,11 @@ class Calendar(HTMLCalendar):
         tasks = Task.objects.filter(due_date__year = self.year, due_date__month=self.month)
         notes = Note.objects.filter(created_on__year=self.year,created_on__month=self.month)
 
-        cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar table table-bordered ">\n'
-        # cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
-        cal += f'{self.formatweekheader()}\n'
-        print(f'{self.formatweekheader()}\n')
+        cal = f'<table class="calendar table table-bordered ">\n'
+        cal += f'<thead>{self.formatweekheader()}</thead>\n'
+        print(cal)
+        cal += f'<tbody>\n'
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f'{self.formatweek(week, tasks)}\n'
-        cal += f'</table>'
+        cal += f'</tbody>\n</table>'
         return cal

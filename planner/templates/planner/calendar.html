@@ -2,32 +2,49 @@
 
 {% block main %}
 
+<div class="p-3">
+    <div class="row">
+        <div class="col">
+            <div class="card bg-primary">
+                <div class="card-body">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ prev_month }}"><i
+                                    class="bi bi-arrow-left-square-fill text-secondary "
+                                    style="font-size: 2rem;"></i></a>
+                        </div>
+                        <div class="col-auto">
+                            <h1 class="text-light display-6"> {{date}} </h1>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ next_month }}"><i
+                                    class="bi bi-arrow-right-square-fill text-secondary "
+                                    style="font-size: 2rem;"></i></a>
+                        </div>
 
-<div class="row">
-    <h1 class="text-white text-center">{{date}}</h1>
-</div>
-<div class="row align-items-center">
-    <div class="col-1">
-        <div class="row">
-            <a class="btn" href="{% url 'calendar' %}?{{ prev_month }}">Last Month</a>
-        </div>
-        <div class="row">
-            <a class="btn" href="{% url 'calendar' %}?{{ prev_year }}">Last Year</a>
-        </div>
-    </div>
-    <div class="col-10">
-        <div class="card shadow bg-light">
-            <div class="card-body p-1">
-                {{calendar}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <h1 class="card-title">Notes</h1>
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-1">
-        <div class="row">
-            <a class="btn" href="{% url 'calendar' %}?{{ next_month }}">Next Month</a>
-        </div>
-        <div class="row">
-            <a class="btn" href="{% url 'calendar' %}?{{ next_year }}">Next Year</a>
+        <div class="col-9">
+            <div class="card shadow bg-primary">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-">
+                            {{calendar}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

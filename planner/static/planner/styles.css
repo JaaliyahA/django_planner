@@ -1,45 +1,56 @@
  :root {
-     --app-height: 100vh
+     --app-height: 100vh;
+     --primary-color: #c00000;
+     --secondary-color: #525252;
+     --tertiary-color: rgb(132, 134, 124);
+     --soft-color: #f2f2f2;
+     --color2: #FBFEF9;
+     --color3: #85877C;
+     --color4: #0a090C;
+     --color5: #07393C;
+     --color6: #e9e2eec9;
+     --bs-primary: #7e569b;
  }
 
- /* .calendar {
+ :root,
+ [data-bs-theme=light] {
+     --bs-primary: #9a43d8c9;
+ }
+
+ .calendar {
 
      margin: auto;
-     font-size: 13px;
+     table-layout: fixed;
+     width: inherit !important;
+
  }
 
- .calendar tr,
- .calendar td {
-     border: 0.5px solid rgba(0, 0, 0, 0.753);
- }
 
  .calendar th {
-
      text-align: center;
      font-size: 18px;
- } */
+ }
 
  .calendar td {
-     /* max-width: 200px;
-     height: 130px;
-     max-height: 100px; */
-     overflow: hidden;
-     text-overflow: ellipsis;
-     white-space: nowrap;
-     /* padding: 10px 0px 0px 5px; */
+     width: 150px !important;
+     height: 75px !important;
+     max-width: 150px !important;
+     max-height: 75px !important;
+     min-width: 150px !important;
+     min-height: 75px !important;
+     overflow: scroll;
  }
 
- .month {
-     font-size: 25px;
- }
+ /* .calendar td div {
+     width: 150px;
+     height: 150px;
 
- .date {
-     font-size: 16px;
- }
+ } */
+
 
  .mainContent {
-     height: calc(100vh - 85px);
-     background-color: #662020;
+     height: calc(100vh - 56px);
+     background-color: var(--soft-color);
  }
 
 

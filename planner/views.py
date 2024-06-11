@@ -1,9 +1,12 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, MonthArchiveView
 import calendar
-from .utils import Calendar
+from .utils import Cal2
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms  import TaskForm, NoteForm, UserForm
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
@@ -13,31 +16,48 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
+
 from .models import User, ToDoList, Task, Note
 
-class CalendarView(ListView):
+class CalendarView(LoginRequiredMixin,ListView):
     model = Task
     template_name = 'planner/calendar.html'
+    login_url = "/login"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        date = get_date(self.request.GET.get('month', None))
+        # retrieve the tasks
+        month_tasks = Task.objects.filter(
+                                    due_date__month=date.month,
+                                    due_date__year = date.year,
+                                    user= self.request.user
+                                    )
+        return month_tasks
+
 
     def get_context_data(self, **kwargs):
+        # generate the variables for the template
         context = super().get_context_data(**kwargs)
-
-        # use today's date for the calendar
-        d = get_date(self.request.GET.get('month', None))
-        print(d)
+        user = self.request.user
+        date = get_date(self.request.GET.get('month', None))
+                
+        # generate calendar from today's date
         
-        cal = Calendar(d.year, d.month)
+       # cal = calendar.Calendar()
+        #cal2 = cal.monthdays2calendar(date.year, date.month)
 
-        html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
-        context['date'] = f'{MONTHS[d.month - 1]} {d.year}'
+        cal = Cal2(date.year, date.month,user).formatmonth()
+
+        context['calendar'] = cal
+        context['header'] = DAYS
+        context['date'] = f'{calendar.month_name[date.month]} {date.year}'
+        context['prev_month'] = prev_month(date)
+        context['next_month'] = next_month(date)
+        context['today'] = date # FIX: url displays last viewed month
         
-        context['prev_month'] = prev_month(d)
-        context['next_month'] = next_month(d)
-        context['prev_year'] = prev_year(d)
-        context['next_year'] = next_year(d)
+        print(cal)
         return context
-    
+   
 class SearchResultsView(ListView):
     model = Task
     template_name = 'planner/search_results.html'
@@ -79,7 +99,7 @@ def get_date(req_day):
             return datetime.date(year, month, day=1)
         return datetime.date.today()
 
-MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 def daily(request, year, month, day):
     date = f'{MONTHS[month-1]} {day}, {year}'

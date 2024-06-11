@@ -1,52 +1,56 @@
 {% extends "planner/layout.html" %}
 
 {% block main %}
-
-<div class="p-3">
-    <div class="row">
-        <div class="col">
-            <div class="card bg-primary">
-                <div class="card-body">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ prev_month }}"><i
-                                    class="bi bi-arrow-left-square-fill text-secondary "
-                                    style="font-size: 2rem;"></i></a>
-                        </div>
-                        <div class="col-auto">
-                            <h1 class="text-light display-6"> {{date}} </h1>
-                        </div>
-                        <div class="col-auto">
-                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ next_month }}"><i
-                                    class="bi bi-arrow-right-square-fill text-secondary "
-                                    style="font-size: 2rem;"></i></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="card bg-white">
-                    <div class="card-body">
-                        <h1 class="card-title">Notes</h1>
-
-                    </div>
-                </div>
+<div class="container">
+    <div class="h-100 p-3">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                <h1 class="card-title text-center text-primary">Notes</h1>
             </div>
         </div>
-        <div class="col-9">
-            <div class="card shadow bg-primary">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-">
-                            {{calendar}}
-                        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class=" d-flex justify-content-between">
+                    <div class="btn-group">
+                        <a class="btn btn-sm" href="{% url 'calendar' %}?{{ prev_month }}"><i
+                                class="bi bi-arrow-left-square-fill text-secondary " style="font-size: 2rem;"></i></a>
+                        <a class="btn btn-sm" href="{% url 'calendar' %}?{{ next_month }}"><i
+                                class="bi bi-arrow-right-square-fill text-secondary " style="font-size: 2rem;"></i></a>
+                        <a href="{% url 'calendar' %}?{{ today }}" class="btn btn-sm">Today</a>
                     </div>
+                    <h4 class="display-6"> {{date}} </h4>
                 </div>
+                <div class="calendarGrid">
+                    <div class="row row-cols-7">
+                        {% for day in header %}
+                        <div class="col">
+                            <span class="text-center"><strong>{{day}}</strong></span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% for week in calendar %}
+                    <div class="row row-cols-7 calendarRow">
+                        <div class="col card calendarCard">
+                            <div class="card-body p-0">
+                                <div class="">
+                                    {% if day != 0 %}
+                                    <span class="">{{day}}</span>
+                                    {% else %}
+                                    <span class="invisible">text</span>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+
             </div>
 
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

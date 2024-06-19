@@ -2,49 +2,41 @@
 
 {% block main %}
 
-<div class="p-3">
-    <div class="row">
-        <div class="col">
-            <div class="card bg-primary">
-                <div class="card-body">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ prev_month }}"><i
-                                    class="bi bi-arrow-left-square-fill text-secondary "
-                                    style="font-size: 2rem;"></i></a>
-                        </div>
-                        <div class="col-auto">
-                            <h1 class="text-light display-6"> {{date}} </h1>
-                        </div>
-                        <div class="col-auto">
-                            <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ next_month }}"><i
-                                    class="bi bi-arrow-right-square-fill text-secondary "
-                                    style="font-size: 2rem;"></i></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="card bg-white">
+<div class="container-fluid container-lg">
+    <div class="p-3">
+        <div class="row">
+            <div class="col">
+                <div class="card bg-primary">
                     <div class="card-body">
-                        <h1 class="card-title">Notes</h1>
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ prev_month }}"><i
+                                        class="bi bi-arrow-left-square-fill text-secondary "
+                                        style="font-size: 2rem;"></i></a>
+                            </div>
+                            <div class="col-auto">
+                                <h1 class="text-light display-6"> {{date}} </h1>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn px-0 mx-0" href="{% url 'calendar' %}?{{ next_month }}"><i
+                                        class="bi bi-arrow-right-square-fill text-secondary "
+                                        style="font-size: 2rem;"></i></a>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-9">
-            <div class="card shadow bg-primary">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-">
-                            {{calendar}}
-                        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card shadow bg-primary">
+                    <div class="card-body">
+                        {{calendar}}
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>

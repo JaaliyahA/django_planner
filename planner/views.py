@@ -4,6 +4,7 @@ import calendar
 from .utils import Calendar
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms  import TaskForm, NoteForm, UserForm
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
@@ -15,18 +16,20 @@ from django.utils.safestring import mark_safe
 
 from .models import User, ToDoList, Task, Note
 
-class CalendarView(ListView):
+class CalendarView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'planner/calendar.html'
+    login_url = "/login"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
 
         # use today's date for the calendar
         d = get_date(self.request.GET.get('month', None))
         print(d)
         
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(d.year, d.month, user)
 
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
@@ -81,17 +84,18 @@ def get_date(req_day):
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+@login_required
 def daily(request, year, month, day):
     date = f'{MONTHS[month-1]} {day}, {year}'
-    in_progress_tasks = Task.objects.filter(is_completed = False)
+    in_progress_tasks = Task.objects.filter(is_completed = False,
+                                            user = request.user)
     tasks = Task.objects.filter(due_date__day=day,
                                 due_date__month=month,
-                                due_date__year = year,)
-    print(tasks)
+                                due_date__year = year,
+                                user = request.user)
     notes = Note.objects.filter(created_on__day=day, 
-                                            created_on__month = month,
-                                            created_on__year = year)
-    print(notes)
+                                created_on__month = month,
+                                created_on__year = year)
     return render(request, "planner/day.html", {"date":date, "tasks": tasks, "notes": notes, "in_prog_tasks": in_progress_tasks })
 
 def index(request):

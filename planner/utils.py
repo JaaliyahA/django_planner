@@ -98,9 +98,12 @@ class Cal2 (Calendar):
     
     def formatmonth(self):
         cal = {}
+        dates = []
         for week in self.monthdays2calendar(self.year, self.month):
+            print(week)
             for day, weekday in week:
-                print(week)
-                # cal[day] = self.get_notes(day)
+                cal[day] = self.get_notes(day)
+                #print(week)
                 
+        
         return cal

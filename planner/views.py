@@ -44,7 +44,7 @@ class CalendarView(LoginRequiredMixin,ListView):
         # generate calendar from today's date
         
        # cal = calendar.Calendar()
-        #cal2 = cal.monthdays2calendar(date.year, date.month)
+        #cal2 = calendar.Calendar.monthdays2calendar(date.year, date.month)
 
         cal = Cal2(date.year, date.month,user).formatmonth()
 
@@ -55,7 +55,6 @@ class CalendarView(LoginRequiredMixin,ListView):
         context['next_month'] = next_month(date)
         context['today'] = date # FIX: url displays last viewed month
         
-        print(cal)
         return context
    
 class SearchResultsView(ListView):

@@ -28,23 +28,18 @@
                         </div>
                         {% endfor %}
                     </div>
-                    {% for week in calendar %}
-                    <div class="row row-cols-7 calendarRow">
-                        <div class="col card calendarCard">
+                    <div class="row row-cols-7">
+                        {% for day, week in calendar.items %}
+                        <div class="col card">
                             <div class="card-body p-0">
                                 <div class="">
-                                    {% if day != 0 %}
                                     <span class="">{{day}}</span>
-                                    {% else %}
-                                    <span class="invisible">text</span>
-                                    {% endif %}
-
                                 </div>
                             </div>
                         </div>
+
                         {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
 
 

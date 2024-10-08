@@ -31,6 +31,7 @@
     <div class="vh-100">
         <nav class="navbar sticky-top bg-primary">
             <div class="container-fluid">
+
                 <a class="navbar-brand" href="{% url 'index' %}">Bujo</a>
                 {% if user.is_authenticated %}
                 <ul class="nav">
@@ -46,7 +47,6 @@
                         <a class="nav-link" href="{% url 'noteList' %}">My Notes</a>
                     </li> -->
                 </ul>
-
 
                 <div class="d-flex">
                     <a class="nav-brand" href="{% url 'profile' %}">
@@ -64,10 +64,11 @@
                 </div>
                 {% endif %}
             </div>
+
         </nav>
 
         <main>
-            <div class="container-fluid mainContent">
+            <div class="mainContent">
                 {% block main %}
                 {% endblock %}
             </div>

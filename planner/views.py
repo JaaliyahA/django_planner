@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, MonthArchiveView
 import calendar
-from .utils import Cal2
+from .utils import Cal2, Cale
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -34,7 +34,6 @@ class CalendarView(LoginRequiredMixin,ListView):
                                     )
         return month_tasks
 
-
     def get_context_data(self, **kwargs):
         # generate the variables for the template
         context = super().get_context_data(**kwargs)
@@ -42,15 +41,16 @@ class CalendarView(LoginRequiredMixin,ListView):
         date = get_date(self.request.GET.get('month', None))
                 
         # generate calendar from today's date
-        
-       # cal = calendar.Calendar()
-        #cal2 = calendar.Calendar.monthdays2calendar(date.year, date.month)
-
         cal = Cal2(date.year, date.month,user).formatmonth()
 
+        current_month = {
+             'month':f'{calendar.month_name[date.month]}',
+             'year': f'{date.year}',
+        }
+        print(cal)
         context['calendar'] = cal
         context['header'] = DAYS
-        context['date'] = f'{calendar.month_name[date.month]} {date.year}'
+        context['date'] = current_month
         context['prev_month'] = prev_month(date)
         context['next_month'] = next_month(date)
         context['today'] = date # FIX: url displays last viewed month
@@ -80,12 +80,14 @@ def next_month(d):
         next_month = last + datetime.timedelta(days=1)
         month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
         return month
+
 def prev_year(d):
         first = d.replace(day=1)
         prev_year = first - datetime.timedelta(days=365)
         print(prev_year)
         month = 'month=' + str(prev_year.year) + '-' + str(prev_year.month)
         return month
+
 def next_year(d):
         first = d.replace(day=1)
         next_year = first + datetime.timedelta(days=365)

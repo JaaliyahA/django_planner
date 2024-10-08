@@ -2,26 +2,48 @@
 
 {% block main %}
 {% load static %}
-
-<div class="" style="background-color: #25003e; margin: 0 0;">
+<div class="container-fluid  h-100">
     <div class="row">
-        <div class="" style="height: 100px; background-color: #b274db;">
-            <a href="" class="nav-link"></a>
+        <div class="bg-primary p-4">
+            <h1 class="display-3 text-center text-white">Plan Your Success, One Day at a Time!</h1>
         </div>
     </div>
-    <div class="row  align-items-center">
-        <div class=" col-6">
-            <img src="{% static 'planner/woman-book.jpg' %}" alt="" class="img-fluid border">
+    <div class="row align-items-center">
+        <div class="col-lg-7 p-0 text-center">
+            <img src="{% static 'planner/woman-book.jpg' %}" alt="" class="img-fluid">
+
         </div>
-        <div class="col-6">
-            <h1 class="display-1 text-center text-white">Plan Your Success, One Day at a Time!</h1>
+        <div class="col-lg-5 text-center border border-4">
+            <p class="p-4 h5">
+                "Achieving your dreams starts with a clear plan, and we’re here to help you break down big goals
+                into
+                manageable steps. With our intuitive tools, you can prioritize tasks, stay organized, and track your
+                progress daily. Whether it's personal growth, career milestones, or everyday tasks, success is built
+                one
+                day at a time—let us guide you on your journey. Start today and watch your ambitions come to life,
+                one
+                well-planned day after another."
+            </p>
+            <a class="btn btn-lg btn-secondary mb-3" href="{% url 'login' %}">Get Started Today</a>
         </div>
+
+
     </div>
     <div class="row">
-        <div class="" style="height: 100px; background-color: #b274db;"></div>
+        <div class="bg-primary" style="height: 100px"></div>
     </div>
-
 </div>
+<!-- <div class="" style="background-color: #25003e; margin: 0 0;"> -->
+
+<!-- <div class="bg-primary" style="height: 200px"></div> -->
+
+
+
+
+
+
+
+
 
 
 {% endblock %}

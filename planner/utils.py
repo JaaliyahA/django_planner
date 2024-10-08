@@ -69,7 +69,7 @@ class Cal2 (Calendar):
         super(Cal2, self).__init__()
 
     def generatePageUrl(self, day):
-        return (f'/{self.year}/{self.month}/{day}') 
+        return (f'{self.year}/{self.month}/{day}') 
 	
 
     def get_notes(self, day):
@@ -97,13 +97,15 @@ class Cal2 (Calendar):
         return tasks
     
     def formatmonth(self):
-        cal = {}
-        dates = []
-        for week in self.monthdays2calendar(self.year, self.month):
-            print(week)
-            for day, weekday in week:
-                cal[day] = self.get_notes(day)
-                #print(week)
-                
+        complete_calendar = {}
+        weeks = self.monthdays2calendar(self.year, self.month)  
         
-        return cal
+        # each week is a list with 7 tuples
+        for week_number in range(len(weeks)):
+            weekly_tasks = []
+            for day, weekday in weeks[week_number]:
+                daily_tasks = self.get_notes(day)
+                weekly_tasks.append([day, daily_tasks, self.generatePageUrl(day)])
+                complete_calendar[week_number + 1] = weekly_tasks
+        
+        return complete_calendar

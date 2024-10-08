@@ -1,14 +1,14 @@
 {% extends "planner/layout.html" %}
 
 {% block main %}
-<div class="container">
+<div class="container-fluid">
     <div class="h-100 p-3">
+        <div class="row">
+        </div>
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 <h1 class="card-title text-center text-primary">Notes</h1>
             </div>
-        </div>
-        <div class="row">
             <div class="col-sm">
                 <div class=" d-flex justify-content-between">
                     <div class="btn-group">
@@ -18,28 +18,48 @@
                                 class="bi bi-arrow-right-square-fill text-secondary " style="font-size: 2rem;"></i></a>
                         <a href="{% url 'calendar' %}?{{ today }}" class="btn btn-sm">Today</a>
                     </div>
-                    <h4 class="display-6"> {{date}} </h4>
+                    <h4 class="display-6"> {{date.month}} {{date.year}} </h4>
                 </div>
+
                 <div class="calendarGrid">
-                    <div class="row row-cols-7">
+                    <div class="row">
                         {% for day in header %}
                         <div class="col">
-                            <span class="text-center"><strong>{{day}}</strong></span>
+                            <h6 class="lead text-center">{{day}}</h6>
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="row row-cols-7">
-                        {% for day, week in calendar.items %}
-                        <div class="col card">
-                            <div class="card-body p-0">
-                                <div class="">
-                                    <span class="">{{day}}</span>
+                    {% for week_num, task_list in calendar.items %}
+                    <div class="row g-0">
+                        {% for day, tasks, url in task_list %}
+                        <div class="col">
+                            <div class=" card" style="height: 9rem;">
+                                {% if day != 0 %}
+                                <h6 class="card-header text-center">{{day}}</h6>
+
+
+                                {% else %}
+                                <h6 class="card-header"></h6>
+                                {% endif %}
+
+                                <div class="card-body calendarBox">
+                                    <ul class="list-group list-group-flush">
+                                        {% for item in tasks %}
+                                        <li class="list-group-item p-0 pb-1">
+                                            <i class="bi bi-clock"></i>
+                                            <span class="text-truncat">{{item.title}}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                         {% endfor %}
                     </div>
+
+                    {% endfor %}
                 </div>
 
 
